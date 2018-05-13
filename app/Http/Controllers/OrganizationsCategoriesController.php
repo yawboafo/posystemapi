@@ -86,7 +86,7 @@ class OrganizationsCategoriesController extends Controller
 
         }else{
 
-            $organizationCategory = Organizationcategory::where('OrganizationCategoryName','=',$OrganizationCategoryName);
+            $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();;
             $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
             $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
             $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');

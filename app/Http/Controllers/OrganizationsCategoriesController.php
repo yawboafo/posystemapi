@@ -30,7 +30,7 @@ class OrganizationsCategoriesController extends Controller
          $response->code = "200";
          $response->status = "Success";
          $response->message = "Organization Category was saved";
-         $response->data = $saved;
+         $response->data = json_encode($organizationCategory);
 
 
          $responseJSON = json_encode($response);
@@ -46,7 +46,7 @@ class OrganizationsCategoriesController extends Controller
          $response->code = "500";
          $response->status = "Failed";
          $response->message = "Organization Category was failed to save";
-         $response->data = $saved;
+         $response->data = "null";
 
 
          $responseJSON = json_encode($response);

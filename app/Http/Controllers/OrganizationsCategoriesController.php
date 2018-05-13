@@ -16,7 +16,7 @@ class OrganizationsCategoriesController extends Controller
        // $OrganizationCategoryName = $request->input('OrganizationCategoryName');
 
         //return  $OrganizationCategoryName;
-        return response()->json($request);
+        return response()->json($request->all());
     }
 
 

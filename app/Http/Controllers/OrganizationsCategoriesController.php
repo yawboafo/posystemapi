@@ -246,10 +246,10 @@ class OrganizationsCategoriesController extends Controller
             $response->data = "null";
 
 
-           // $responseJSON = json_encode($response);
+            $responseJSON = json_encode($response);
 
 
-            return $response;
+            return $responseJSON;
 
         }else{
 
@@ -260,10 +260,10 @@ class OrganizationsCategoriesController extends Controller
             $response->data = $categories;
 
 
-            // $responseJSON = json_encode($response);
+            $responseJSON = json_encode($response);
 
 
-            return $response;
+            return $responseJSON;
 
         }
 

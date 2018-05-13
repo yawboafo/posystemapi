@@ -237,7 +237,38 @@ class OrganizationsCategoriesController extends Controller
         $categories = Organizationcategory::all();
 
 
-        return $categories;
+        if(is_null($categories)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Failed";
+            $response->message = "Organization Categories is empty";
+            $response->data = "null";
+
+
+           // $responseJSON = json_encode($response);
+
+
+            return $response;
+
+        }else{
+
+            $response = new Requestresponse();
+            $response->code = "200";
+            $response->status = "Success";
+            $response->message = "Organization Categories ";
+            $response->data = $categories;
+
+
+            // $responseJSON = json_encode($response);
+
+
+            return $response;
+
+        }
+
+
+
 
 
     }

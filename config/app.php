@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'posystemAPI'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+   // 'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://posystemapi.herokuapp.com/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Reliese\Coders\CodersServiceProvider::class,
         /*
          * Application Service Providers...
          */

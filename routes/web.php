@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/upload', function () {
+    return view('welcome');
+});
+
+
+Route::post('category/create',['uses' => 'ProductCategoryController@createCategory']);
+Route::get('getallCategories',['uses' => 'ProductCategoryController@getAllCategories']);

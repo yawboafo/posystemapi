@@ -11,7 +11,7 @@ class ProductCategoryController extends Controller
 
     public function createCategory(Request $request){
 
-        $category = Category::create($request->all());
+       // $category = Category::create($request->all());
 
 
         return "hello world";

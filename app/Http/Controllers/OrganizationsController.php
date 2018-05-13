@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\LocalModels\Requestresponse;
 use Illuminate\Http\Request;
 use App\Models\Organization;
+
 class OrganizationsController extends Controller
 {
     public function createOrganization(Request $request){

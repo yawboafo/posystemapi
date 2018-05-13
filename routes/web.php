@@ -20,4 +20,4 @@ Route::get('/upload', function () {
 });
 
 
-Route::post('category/create/',['uses' => 'ProductCategoryController@createCategory']);
+Route::post('category/create',['uses' => 'ProductCategoryController@createCategory']);

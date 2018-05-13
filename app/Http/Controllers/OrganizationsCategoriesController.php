@@ -228,8 +228,6 @@ class OrganizationsCategoriesController extends Controller
 
     }
 
-
-
     public function getAllOrganizationcategory(){
 
 

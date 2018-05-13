@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/upload', function () {
     return view('welcome');
 });
+
+
+Route::post('category/create/',['uses' => 'ProductCategoryController@createCategory']);

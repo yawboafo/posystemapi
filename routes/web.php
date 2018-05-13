@@ -28,3 +28,4 @@ Route::post('organization/create',['uses' => 'OrganizationsController@createOrga
 
 
 Route::post('organizationCategory/create',['uses' => 'OrganizationsCategoriesController@createOrganizationcategory']);
+Route::post('organizationCategory/update',['uses' => 'OrganizationsCategoriesController@updateOrganizationcategory']);

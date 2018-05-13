@@ -14,16 +14,18 @@ class OrganizationsCategoriesController extends Controller
 
         $organizationCategory = new Organizationcategory;
 
-      $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
-      $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
-      $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
 
 
-     $saved =  $organizationCategory->save();
+        $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
+        $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
+        $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
+
+
+        $saved =  $organizationCategory->save();
 
 
 
-     if ($saved){
+         if ($saved){
 
 
          $response = new Requestresponse();
@@ -45,7 +47,7 @@ class OrganizationsCategoriesController extends Controller
          $response = new Requestresponse();
          $response->code = "500";
          $response->status = "Failed";
-         $response->message = "Organization Category was failed to save";
+         $response->message = "Organization Category  failed to save";
          $response->data = "null";
 
 
@@ -64,7 +66,76 @@ class OrganizationsCategoriesController extends Controller
 
     public function updateOrganizationcategory(Request $request){
 
-        $category = Organizationcategory::updateOrCreate($request->all());
+        $OrganizationCategoryName = $request->input('OrganizationCategoryName');
+
+
+        if ( is_null($OrganizationCategoryName)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Validate errors";
+            $response->message = "Organization Category Name cannot be empty";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+
+        }else{
+
+            $organizationCategory = Organizationcategory::where('OrganizationCategoryName','=',$OrganizationCategoryName);
+            $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
+            $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
+            $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
+            $saved =  $organizationCategory->save();
+
+            if ($saved){
+
+
+                $response = new Requestresponse();
+                $response->code = "200";
+                $response->status = "Success";
+                $response->message = "Organization Category Updated";
+                $response->data = $organizationCategory->toJson();
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+
+            }else{
+
+
+                $response = new Requestresponse();
+                $response->code = "500";
+                $response->status = "Failed";
+                $response->message = "Organization Category  failed to update";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
 
 
         return $category;

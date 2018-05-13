@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 13 May 2018 17:40:39 +0000.
+ * Date: Sun, 13 May 2018 21:43:03 +0000.
  */
 
 namespace App\Models;
@@ -40,8 +40,7 @@ class Organization extends Eloquent
 		'Address',
 		'Phone',
 		'Email',
-		'Type',
-        'OrganizationCategory_id'
+		'Type'
 	];
 
 	public function organizationcategory()

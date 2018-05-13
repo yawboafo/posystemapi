@@ -11,43 +11,268 @@ class ProductCategoryController extends Controller
 
     public function createCategory(Request $request){
 
-       $category = Category::create($request->all());
 
 
-        return $category;
+        $category = new Category;
+
+
+
+        $category->Name = $request->input('Name');
+        $category->Address = $request->input('Address');
+        $category->Email = $request->input('Email');
+        $category->Phone = $request->input('Phone');
+        $category->Type = $request->input('Type');
+        $category->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+        $saved =  $category->save();
+
+
+
+        if ($saved){
+
+
+            $response = new Requestresponse();
+            $response->code = "200";
+            $response->status = "Success";
+            $response->message = "Organization  was saved";
+            $response->data = $organization;
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+
+        }else{
+
+
+            $response = new Requestresponse();
+            $response->code = "500";
+            $response->status = "Failed";
+            $response->message = "Organization   failed to save";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+        }
+
+
+
 
     }
 
 
     public function updateCategory(Request $request){
 
-        $category = Category::updateOrCreate($request->all());
+        $Name = $request->input('Name');
 
 
-        return $category;
+        if ( is_null($Name)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Validate errors";
+            $response->message = "Organization  Name cannot be empty";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+
+        }else{
+
+            $organization = Organization::where('Name',$Name)->first();
+
+            if ( is_null($organization)){
+
+                $response = new Requestresponse();
+                $response->code = "100";
+                $response->status = "Failed";
+                $response->message = "Organization  does not exist";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+            }else{
+
+
+                $organization->Name = $request->input('Name');
+                $organization->Address = $request->input('Address');
+                $organization->Email = $request->input('Email');
+                $organization->Phone = $request->input('Phone');
+                $organization->Type = $request->input('Type');
+                $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+                $saved =  $organization->save();
+
+                if ($saved){
+
+
+                    $response = new Requestresponse();
+                    $response->code = "200";
+                    $response->status = "Success";
+                    $response->message = "Organization  was saved";
+                    $response->data = $organization->toJson();
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+
+                }else{
+
+
+                    $response = new Requestresponse();
+                    $response->code = "500";
+                    $response->status = "Failed";
+                    $response->message = "Organization   failed to save";
+                    $response->data = "null";
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+                }
+
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
 
-    public function deleteCategory($id){
+    public function deleteCategory(Request $request){
+
+        $Name = $request->input('Name');
+        $organization = Organization::where('Name',$Name)->first();
 
 
-        $category = Category::find($id);
-        $category->delete();
+
+        if ( is_null($organization)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Failed";
+            $response->message = "Organization  does not exist";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+        }else {
+
+            $deleted =  $organization->delete();
+
+
+            if($deleted){
+
+                $response = new Requestresponse();
+                $response->code = "200";
+                $response->status = "Success";
+                $response->message = "Organization Category deleted";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+            }else{
+                $response = new Requestresponse();
+                $response->code = "100";
+                $response->status = "Failed";
+                $response->message = "Organization failed to delete";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+            }
+
+        }
+
+
 
 
     }
 
-
-
-    public function getAllCategories(){
+    public function getAllCategory(){
 
 
 
-        $categories = Category::all();
+        $categories = Organization::all();
 
 
-        return $categories;
+        if(is_null($categories)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Failed";
+            $response->message = "Organization  is empty";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+        }else{
+
+            $response = new Requestresponse();
+            $response->code = "200";
+            $response->status = "Success";
+            $response->message = "Organizations ";
+            $response->data = $categories;
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+        }
+
+
+
 
 
     }

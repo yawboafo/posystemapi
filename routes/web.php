@@ -22,3 +22,9 @@ Route::get('/upload', function () {
 
 Route::post('category/create',['uses' => 'ProductCategoryController@createCategory']);
 Route::get('getallCategories',['uses' => 'ProductCategoryController@getAllCategories']);
+
+
+Route::post('organization/create',['uses' => 'OrganizationsController@createOrganization']);
+
+
+Route::post('organizationCategory/create',['uses' => 'OrganizationsCategoriesController@createOrganizationcategory']);

@@ -30,7 +30,7 @@ class OrganizationsCategoriesController extends Controller
          $response->code = "200";
          $response->status = "Success";
          $response->message = "Organization Category was saved";
-         $response->data = json_encode($organizationCategory);
+         $response->data = $organizationCategory->toJson();
 
 
          $responseJSON = json_encode($response);

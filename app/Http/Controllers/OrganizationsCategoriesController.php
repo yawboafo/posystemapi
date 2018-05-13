@@ -9,10 +9,13 @@ class OrganizationsCategoriesController extends Controller
 {
     public function createOrganizationcategory(Request $request){
 
-        $category = Organizationcategory::create($request->all());
+       // $category = Organizationcategory::create($request->all());
 
 
-        return $category;
+
+        $OrganizationCategoryName = $request->input('OrganizationCategoryName');
+
+        return  $OrganizationCategoryName;
 
     }
 

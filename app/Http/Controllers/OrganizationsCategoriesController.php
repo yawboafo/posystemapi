@@ -168,8 +168,9 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function deleteOrganizationcategory($OrganizationCategoryName){
+    public function deleteOrganizationcategory(Request $request){
 
+        $OrganizationCategoryName = $request->input('OrganizationCategoryName');
 
         $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();
 

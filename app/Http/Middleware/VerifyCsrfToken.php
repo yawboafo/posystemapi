@@ -15,6 +15,6 @@ class VerifyCsrfToken extends Middleware
         'category/create',
         'organizationCategory/create',
         'organizationCategory/update',
-        'organizationCategory/delete/'
+        'organizationCategory/delete'
     ];
 }

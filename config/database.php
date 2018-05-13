@@ -14,7 +14,8 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
-
+    //
+    //'default' => env('DB_CONNECTION', 'mongodb'),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -33,6 +34,20 @@ return [
 
     'connections' => [
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', 'ds031952.mlab.com'),
+            'port'     => env('DB_PORT', 31952),
+            'database' => env('DB_DATABASE','TLE'),
+            'username' => env('DB_USERNAME','TLE'),
+            'password' => env('DB_PASSWORD','v2jtirksdfuik58spp13kmfamf'),
+            'options'  => [
+                'database' =>  'heroku_dfhp70k0' // sets the authentication database required by mongo 3
+            ]
+               ],
+
+
+
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
@@ -41,11 +56,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'us-cdbr-iron-east-04.cleardb.net'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'heroku_2b619ab8a07bfcc'),
+            'username' => env('DB_USERNAME', 'b52aa5893a4bf0'),
+            'password' => env('DB_PASSWORD', '2849b1a4'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

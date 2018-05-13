@@ -11,7 +11,7 @@ class OrganizationsCategoriesController extends Controller
 
        // $category = Organizationcategory::create($request->all());
 
-
+       // $name = $request->input('name');
 
         $OrganizationCategoryName = $request->input('OrganizationCategoryName');
 

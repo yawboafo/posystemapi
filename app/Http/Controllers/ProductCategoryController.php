@@ -47,7 +47,7 @@ class ProductCategoryController extends Controller
         $categories = Category::all();
 
 
-        return "hello all";
+        return $categories;
 
 
     }

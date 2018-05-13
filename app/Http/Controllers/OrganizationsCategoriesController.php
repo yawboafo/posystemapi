@@ -87,34 +87,13 @@ class OrganizationsCategoriesController extends Controller
         }else{
 
             $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();;
-            $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
-            $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
-            $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
-            $saved =  $organizationCategory->save();
 
-            if ($saved){
-
+            if ( is_null($organizationCategory)){
 
                 $response = new Requestresponse();
-                $response->code = "200";
-                $response->status = "Success";
-                $response->message = "Organization Category Updated";
-                $response->data = $organizationCategory->toJson();
-
-
-                $responseJSON = json_encode($response);
-
-
-                return $responseJSON;
-
-
-            }else{
-
-
-                $response = new Requestresponse();
-                $response->code = "500";
+                $response->code = "100";
                 $response->status = "Failed";
-                $response->message = "Organization Category  failed to update";
+                $response->message = "Organization Category does not exist";
                 $response->data = "null";
 
 
@@ -123,7 +102,53 @@ class OrganizationsCategoriesController extends Controller
 
                 return $responseJSON;
 
+            }else{
+
+
+                $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
+                $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
+                $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
+                $saved =  $organizationCategory->save();
+
+                if ($saved){
+
+
+                    $response = new Requestresponse();
+                    $response->code = "200";
+                    $response->status = "Success";
+                    $response->message = "Organization Category Updated";
+                    $response->data = $organizationCategory->toJson();
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+
+                }else{
+
+
+                    $response = new Requestresponse();
+                    $response->code = "500";
+                    $response->status = "Failed";
+                    $response->message = "Organization Category  failed to update";
+                    $response->data = "null";
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+                }
+
             }
+
+
+
+
+
 
 
 

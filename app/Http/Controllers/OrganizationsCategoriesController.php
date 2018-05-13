@@ -13,10 +13,10 @@ class OrganizationsCategoriesController extends Controller
 
        // $name = $request->input('name');
 
-       // $OrganizationCategoryName = $request->input('OrganizationCategoryName');
+      $OrganizationCategoryName = $request->input('OrganizationCategoryName');
 
         //return  $OrganizationCategoryName;
-        return response()->json($request->all());
+        return $OrganizationCategoryName;
     }
 
 

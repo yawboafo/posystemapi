@@ -19,7 +19,7 @@ class OrganizationsController extends Controller
         $organization->Email = $request->input('Email');
         $organization->Phone = $request->input('Phone');
         $organization->Type = $request->input('Type');
-
+        $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
         $saved =  $organization->save();
 
 
@@ -109,7 +109,7 @@ class OrganizationsController extends Controller
                 $organization->Email = $request->input('Email');
                 $organization->Phone = $request->input('Phone');
                 $organization->Type = $request->input('Type');
-
+                $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
                 $saved =  $organization->save();
 
                 if ($saved){

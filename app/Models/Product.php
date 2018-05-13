@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 13 May 2018 12:57:28 +0000.
+ * Date: Sun, 13 May 2018 14:29:42 +0000.
  */
 
 namespace App\Models;
@@ -16,41 +16,47 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $SKU
  * @property string $IDSKU
  * @property string $Name
- * @property string $Description
- * @property string $Quantity
- * @property string $UnitPrice
+ * @property string $Desciprtion
+ * @property int $Quantity
+ * @property float $UnitPrice
  * @property string $Discount
  * @property string $isAvailable
  * @property string $Ranking
- * @property string $DateCreated
+ * @property string $Datecreated
  * @property string $DateUpdated
  * @property string $Thumbnail
  * @property string $ImageUrl
- * @property int $Category_id
+ * @property int $CategoryID
+ * @property int $Organization_id
  * 
  * @property \App\Models\Category $category
+ * @property \App\Models\Organization $organization
  *
  * @package App\Models
  */
 class Product extends Eloquent
 {
+	protected $table = 'product';
 	public $timestamps = false;
 
 	protected $casts = [
-		'Category_id' => 'int'
+		'Quantity' => 'int',
+		'UnitPrice' => 'float',
+		'CategoryID' => 'int',
+		'Organization_id' => 'int'
 	];
 
 	protected $fillable = [
 		'SKU',
 		'IDSKU',
 		'Name',
-		'Description',
+		'Desciprtion',
 		'Quantity',
 		'UnitPrice',
 		'Discount',
 		'isAvailable',
 		'Ranking',
-		'DateCreated',
+		'Datecreated',
 		'DateUpdated',
 		'Thumbnail',
 		'ImageUrl'
@@ -58,6 +64,11 @@ class Product extends Eloquent
 
 	public function category()
 	{
-		return $this->belongsTo(\App\Models\Category::class, 'Category_id');
+		return $this->belongsTo(\App\Models\Category::class, 'CategoryID');
+	}
+
+	public function organization()
+	{
+		return $this->belongsTo(\App\Models\Organization::class, 'Organization_id');
 	}
 }

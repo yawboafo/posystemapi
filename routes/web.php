@@ -37,4 +37,4 @@ Route::post('organization/create',['uses' => 'OrganizationsController@createOrga
 
 Route::post('organizationCategory/create',['uses' => 'OrganizationsCategoriesController@createOrganizationcategory']);
 Route::post('organizationCategory/update',['uses' => 'OrganizationsCategoriesController@updateOrganizationcategory']);
-Route::delete('organizationCategory/delete{OrganizationCategoryName}', ['uses' => 'OrganizationsCategoriesController@deleteOrganizationcategory']);
+Route::delete('organizationCategory/delete/{OrganizationCategoryName}', ['uses' => 'OrganizationsCategoriesController@deleteOrganizationcategory']);

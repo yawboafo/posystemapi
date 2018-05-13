@@ -20,12 +20,21 @@ Route::get('/upload', function () {
 });
 
 
+
+//PRODUCT CATEGORY
+
 Route::post('category/create',['uses' => 'ProductCategoryController@createCategory']);
 Route::get('getallCategories',['uses' => 'ProductCategoryController@getAllCategories']);
 
 
+//ORGANIZATIONS
+
 Route::post('organization/create',['uses' => 'OrganizationsController@createOrganization']);
 
 
+
+//ORGANIZATION CATEGORY
+
 Route::post('organizationCategory/create',['uses' => 'OrganizationsCategoriesController@createOrganizationcategory']);
 Route::post('organizationCategory/update',['uses' => 'OrganizationsCategoriesController@updateOrganizationcategory']);
+Route::delete('organizationCategory/delete{OrganizationCategoryName}', ['uses' => 'OrganizationsCategoriesController@deleteOrganizationcategory']);

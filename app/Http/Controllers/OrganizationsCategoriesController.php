@@ -86,7 +86,7 @@ class OrganizationsCategoriesController extends Controller
 
         }else{
 
-            $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();;
+            $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();
 
             if ( is_null($organizationCategory)){
 
@@ -168,11 +168,61 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function deleteOrganizationcategory($id){
+    public function deleteOrganizationcategory($OrganizationCategoryName){
 
 
-        $category = Organizationcategory::find($id);
-        $category->delete();
+        $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();
+
+        if ( is_null($organizationCategory)){
+
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Failed";
+            $response->message = "Organization Category does not exist";
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
+
+        }else {
+
+           $deleted =  $organizationCategory->delete();
+
+
+           if($deleted){
+
+               $response = new Requestresponse();
+               $response->code = "200";
+               $response->status = "Success";
+               $response->message = "Organization Category deleted";
+               $response->data = "null";
+
+
+               $responseJSON = json_encode($response);
+
+
+               return $responseJSON;
+           }else{
+               $response = new Requestresponse();
+               $response->code = "100";
+               $response->status = "Failed";
+               $response->message = "Organization Category failed to delete";
+               $response->data = "null";
+
+
+               $responseJSON = json_encode($response);
+
+
+               return $responseJSON;
+
+           }
+
+        }
+
+
 
 
     }

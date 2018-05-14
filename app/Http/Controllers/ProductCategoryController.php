@@ -19,11 +19,11 @@ class ProductCategoryController extends Controller
 
 
 
-            $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
-            );
+           // $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
+            //);
 
 
-            if ($validator->fails())
+           /** if ($validator->fails())
             {
                 $response = new Requestresponse();
                 $response->code = "500";
@@ -35,14 +35,22 @@ class ProductCategoryController extends Controller
                 $responseJSON = json_encode($response);
 
                 return $responseJSON;
-            }else{
+            }else{**/
 
-                $imageUrl = Utility::uploadImage($request,'ImageUrl');
-               // $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
+                $variable =  $request->file('ImageUrl');
+
+                if ( empty ( $variable ) ){
+
+                    $imageUrl = "";
+
+                }else{
+
+                    $imageUrl = Utility::uploadImage($request,'ImageUrl');
+                }
+
+
 
                 $category = new Category;
-
-
 
                 $category->Name = $request->input('Name');
                 $category->Description = $request->input('Description');
@@ -88,7 +96,7 @@ class ProductCategoryController extends Controller
                 }
 
 
-            }
+          //  }
 
 
         }catch (\Exception $exception){

@@ -14,76 +14,96 @@ class ProductCategoryController extends Controller
 
 
 
-        $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
-        );
-
-
-        if ($validator->fails())
-        {
-            $response = new Requestresponse();
-            $response->code = "500";
-            $response->status = "Failed";
-            $response->message = $validator->messages();
-            $response->data = "null";
-
-
-            $responseJSON = json_encode($response);
-
-            return $responseJSON;
-        }else{
-
-            $imageUrl = Utility::uploadImage($request,'ImageUrl');
-            $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
-
-            $category = new Category;
+        try {
 
 
 
-            $category->Name = $request->input('Name');
-            $category->Description = $request->input('Description');
-            $category->Thumbnail = $thumbNail;
-            $category->ImageUrl = $imageUrl;
-            $category->Active = $request->input('Active');
-            $category->Organization_id = $request->input('Organization_id');
-            $saved =  $category->save();
+            $validator = Validator::make($request->all(),['Image'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
+            );
 
 
-
-            if ($saved){
-
-
-                $response = new Requestresponse();
-                $response->code = "200";
-                $response->status = "Success";
-                $response->message = "category  was saved";
-                $response->data = $category;
-
-
-                $responseJSON = json_encode($response);
-
-
-                return $responseJSON;
-
-
-            }else{
-
-
+            if ($validator->fails())
+            {
                 $response = new Requestresponse();
                 $response->code = "500";
                 $response->status = "Failed";
-                $response->message = "category   failed to save";
+                $response->message = $validator->messages();
                 $response->data = "null";
 
 
                 $responseJSON = json_encode($response);
 
-
                 return $responseJSON;
+            }else{
+
+                $imageUrl = Utility::uploadImage($request,'Image');
+                $category = new Category;
+
+
+
+                $category->Name = $request->input('Name');
+                $category->Description = $request->input('Description');
+                $category->Thumbnail = $imageUrl;
+                $category->ImageUrl = $imageUrl;
+                $category->Active = $request->input('Active');
+                $category->Organization_id = $request->input('Organization_id');
+                $saved =  $category->save();
+
+
+
+                if ($saved){
+
+
+                    $response = new Requestresponse();
+                    $response->code = "200";
+                    $response->status = "Success";
+                    $response->message = "category  was saved";
+                    $response->data = $category;
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+
+                }else{
+
+
+                    $response = new Requestresponse();
+                    $response->code = "500";
+                    $response->status = "Failed";
+                    $response->message = "category   failed to save";
+                    $response->data = "null";
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+                }
+
 
             }
 
+        }catch (\Exception $exception){
+
+            $response = new Requestresponse();
+            $response->code = "500";
+            $response->status = "Application Error";
+            $response->message = $exception;
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
 
         }
+
+
 
 
 

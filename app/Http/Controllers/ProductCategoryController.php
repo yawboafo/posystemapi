@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\LocalModels\Requestresponse;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Utilities\Utility;
 
 class ProductCategoryController extends Controller
 {
@@ -12,8 +13,15 @@ class ProductCategoryController extends Controller
     public function createCategory(Request $request){
 
 
+        $this->validate($request,[
+            'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
 
-        $category = new Category;
+
+
+        $var =   Utility::uploadImage($request,ImageUrl);
+
+       /** $category = new Category;
 
 
 
@@ -58,9 +66,11 @@ class ProductCategoryController extends Controller
 
             return $responseJSON;
 
-        }
+        }**/
 
 
+
+        return $var;
 
 
     }

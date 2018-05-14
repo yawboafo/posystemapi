@@ -34,7 +34,7 @@ class ProductCategoryController extends Controller
             $response->code = "200";
             $response->status = "Success";
             $response->message = "category  was saved";
-            $response->data = category;
+            $response->data = $category;
 
 
             $responseJSON = json_encode($response);

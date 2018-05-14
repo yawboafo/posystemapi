@@ -21,7 +21,11 @@ class Utility
         Cloudder::upload($image_name, null);
         $value = Cloudder::getResult();
 
-        return $value->secure_url;
+
+        $jsonValue = json_decode(file_get_contents($value));
+       // $status = $location->status;
+
+        return $jsonValue->secure_url;
 
     }
 

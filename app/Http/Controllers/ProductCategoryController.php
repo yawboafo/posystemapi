@@ -38,7 +38,7 @@ class ProductCategoryController extends Controller
             }else{
 
                 $imageUrl = Utility::uploadImage($request,'ImageUrl');
-                $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
+               // $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
 
                 $category = new Category;
 
@@ -46,7 +46,7 @@ class ProductCategoryController extends Controller
 
                 $category->Name = $request->input('Name');
                 $category->Description = $request->input('Description');
-                $category->Thumbnail = $thumbNail;
+                $category->Thumbnail = $imageUrl;
                 $category->ImageUrl = $imageUrl;
                 $category->Active = $request->input('Active');
                 $category->Organization_id = $request->input('Organization_id');

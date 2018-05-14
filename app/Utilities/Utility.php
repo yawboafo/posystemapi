@@ -17,7 +17,7 @@ class Utility
     {
 
 
-        $image_name = $request->file($image_input_name)->getRealPath();;
+        $image_name = $request->file($image_input_name)->getRealPath();
         Cloudder::upload($image_name, null);
         $value = Cloudder::getResult();
         $jsonValue = json_encode($value);
@@ -31,8 +31,8 @@ class Utility
 
 
 
-        $photo = $request->file($image_input_name);
-        $thumb_img = Image::make($photo->getRealPath())->fit(100, 100, function ($constraint) {
+        $photo = $request->file($image_input_name)->getRealPath();
+        $thumb_img = Image::make($photo)->fit(100, 100, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg');
 

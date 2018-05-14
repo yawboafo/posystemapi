@@ -14,9 +14,11 @@ class ProductCategoryController extends Controller
 
 
 
-        $validator = $this->validate($request,[
-            'ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
-        ]);
+        $validator = Validator::make(
+            $request,[
+                'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            ]
+        );
 
 
         if ($validator->fails())

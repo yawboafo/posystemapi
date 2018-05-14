@@ -39,7 +39,8 @@ class ProductCategoryController extends Controller
 
         $category = new Category;
 
-        if ($request->file('ImageUrl')->isValid()) {
+      //  f ( !empty ( $variable ) )
+        if (!empty ( $request->file('ImageUrl'))) {
 
 
             $imageUrl = Utility::uploadImage($request,'ImageUrl');

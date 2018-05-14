@@ -14,13 +14,16 @@ class ProductCategoryController extends Controller
 
 
 
-        $validator = Validator::make($request,['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
-        );
+       // $validator = Validator::make($request,['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
+        //);
 
 
-        if ($validator->fails())
-        {
-            $response = new Requestresponse();
+
+
+      //  if ($validator->fails())
+        //{
+
+          /*8 $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
             $response->message = $validator->messages();
@@ -29,20 +32,37 @@ class ProductCategoryController extends Controller
 
             $responseJSON = json_encode($response);
 
-            return $responseJSON;
-        }else{
+            return $responseJSON;**/
+       // }else{
+
+
+
+        $category = new Category;
+
+        if ($request->file('ImageUrl')->isValid()) {
+
 
             $imageUrl = Utility::uploadImage($request,'ImageUrl');
+
+            $category->Thumbnail = $imageUrl;
+            $category->ImageUrl = $imageUrl;
+        }else{
+
+
+            $category->Thumbnail = "";
+            $category->ImageUrl = "";
+        }
+
+
            // $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
 
-            $category = new Category;
+
 
 
 
             $category->Name = $request->input('Name');
             $category->Description = $request->input('Description');
-            $category->Thumbnail = $imageUrl;
-            $category->ImageUrl = $imageUrl;
+
             $category->Active = $request->input('Active');
             $category->Organization_id = $request->input('Organization_id');
             $saved =  $category->save();
@@ -83,7 +103,7 @@ class ProductCategoryController extends Controller
             }
 
 
-        }
+       // }
 
 
 

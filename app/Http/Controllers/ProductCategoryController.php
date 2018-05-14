@@ -18,11 +18,11 @@ class ProductCategoryController extends Controller
 
 
         $category->Name = $request->input('Name');
-        $category->Address = $request->input('Address');
-        $category->Email = $request->input('Email');
-        $category->Phone = $request->input('Phone');
-        $category->Type = $request->input('Type');
-        $category->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+        $category->Description = $request->input('Description');
+        $category->Thumbnail = $request->input('Thumbnail');
+        $category->ImageUrl = $request->input('ImageUrl');
+        $category->Active = $request->input('Active');
+        $category->Organization_id = $request->input('Organization_id');
         $saved =  $category->save();
 
 
@@ -33,8 +33,8 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "200";
             $response->status = "Success";
-            $response->message = "Organization  was saved";
-            $response->data = $organization;
+            $response->message = "category  was saved";
+            $response->data = category;
 
 
             $responseJSON = json_encode($response);
@@ -49,7 +49,7 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = "Organization   failed to save";
+            $response->message = "category   failed to save";
             $response->data = "null";
 
 
@@ -76,7 +76,7 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "100";
             $response->status = "Validate errors";
-            $response->message = "Organization  Name cannot be empty";
+            $response->message = "category  Name cannot be empty";
             $response->data = "null";
 
 
@@ -88,14 +88,14 @@ class ProductCategoryController extends Controller
 
         }else{
 
-            $organization = Organization::where('Name',$Name)->first();
+            $category = Category::where('Name',$Name)->first();
 
-            if ( is_null($organization)){
+            if ( is_null($category)){
 
                 $response = new Requestresponse();
                 $response->code = "100";
                 $response->status = "Failed";
-                $response->message = "Organization  does not exist";
+                $response->message = "Category  does not exist";
                 $response->data = "null";
 
 
@@ -107,22 +107,23 @@ class ProductCategoryController extends Controller
             }else{
 
 
-                $organization->Name = $request->input('Name');
-                $organization->Address = $request->input('Address');
-                $organization->Email = $request->input('Email');
-                $organization->Phone = $request->input('Phone');
-                $organization->Type = $request->input('Type');
-                $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
-                $saved =  $organization->save();
+                $category->Name = $request->input('Name');
+                $category->Description = $request->input('Description');
+                $category->Thumbnail = $request->input('Thumbnail');
+                $category->ImageUrl = $request->input('ImageUrl');
+                $category->Active = $request->input('Active');
+                $category->Organization_id = $request->input('Organization_id');
 
+
+                $saved =  $category->save();
                 if ($saved){
 
 
                     $response = new Requestresponse();
                     $response->code = "200";
                     $response->status = "Success";
-                    $response->message = "Organization  was saved";
-                    $response->data = $organization->toJson();
+                    $response->message = "Category  was saved";
+                    $response->data = $category->toJson();
 
 
                     $responseJSON = json_encode($response);
@@ -137,7 +138,7 @@ class ProductCategoryController extends Controller
                     $response = new Requestresponse();
                     $response->code = "500";
                     $response->status = "Failed";
-                    $response->message = "Organization   failed to save";
+                    $response->message = "Category   failed to save";
                     $response->data = "null";
 
 
@@ -176,16 +177,16 @@ class ProductCategoryController extends Controller
     public function deleteCategory(Request $request){
 
         $Name = $request->input('Name');
-        $organization = Organization::where('Name',$Name)->first();
+        $category = Category::where('Name',$Name)->first();
 
 
 
-        if ( is_null($organization)){
+        if ( is_null($category)){
 
             $response = new Requestresponse();
             $response->code = "100";
             $response->status = "Failed";
-            $response->message = "Organization  does not exist";
+            $response->message = "Category  does not exist";
             $response->data = "null";
 
 
@@ -196,7 +197,7 @@ class ProductCategoryController extends Controller
 
         }else {
 
-            $deleted =  $organization->delete();
+            $deleted =  $category->delete();
 
 
             if($deleted){
@@ -204,7 +205,7 @@ class ProductCategoryController extends Controller
                 $response = new Requestresponse();
                 $response->code = "200";
                 $response->status = "Success";
-                $response->message = "Organization Category deleted";
+                $response->message = "Category deleted";
                 $response->data = "null";
 
 
@@ -216,7 +217,7 @@ class ProductCategoryController extends Controller
                 $response = new Requestresponse();
                 $response->code = "100";
                 $response->status = "Failed";
-                $response->message = "Organization failed to delete";
+                $response->message = "Category failed to delete";
                 $response->data = "null";
 
 
@@ -238,7 +239,7 @@ class ProductCategoryController extends Controller
 
 
 
-        $categories = Organization::all();
+        $categories = Category::all();
 
 
         if(is_null($categories)){
@@ -246,7 +247,7 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "100";
             $response->status = "Failed";
-            $response->message = "Organization  is empty";
+            $response->message = "Categories  is empty";
             $response->data = "null";
 
 
@@ -260,7 +261,7 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "200";
             $response->status = "Success";
-            $response->message = "Organizations ";
+            $response->message = "Categories ";
             $response->data = $categories;
 
 

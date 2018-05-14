@@ -39,7 +39,8 @@ class Category extends Eloquent
 		'Description',
 		'Thumbnail',
 		'ImageUrl',
-		'Active'
+		'Active',
+		'Organization_id'
 	];
 
 	public function organization()

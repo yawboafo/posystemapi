@@ -32,7 +32,7 @@ class Utility
 
 
         $photo = $request->file($image_input_name);
-        $thumb_img = Image::make($photo)->fit(100, 100, function ($constraint) {
+        $thumb_img = Image::make($photo->getRealPath())->fit(100, 100, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg');
 

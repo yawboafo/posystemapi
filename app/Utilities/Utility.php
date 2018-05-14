@@ -18,13 +18,10 @@ class Utility
 
 
         $image_name = $request->file($image_input_name)->getRealPath();;
-
-
-
         Cloudder::upload($image_name, null);
         $value = Cloudder::getResult();
 
-        return $value;
+        return $value->secure_url;
 
     }
 

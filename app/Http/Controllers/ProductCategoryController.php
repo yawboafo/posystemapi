@@ -13,66 +13,86 @@ class ProductCategoryController extends Controller
     public function createCategory(Request $request){
 
 
-        $this->validate($request,[
-            'ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
-        ]);
 
-        $image_name = $request->file('ImageUrl')->getRealPath();;
-
-        Cloudder::upload($image_name, null);
-        $value = Cloudder::getResult();
-       //Utility::uploadImage($request,'ImageUrl');
-
-       /** $category = new Category;
+        $validator = Validator::make(
+            [
+                'ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            ]
+        );
 
 
-
-        $category->Name = $request->input('Name');
-        $category->Description = $request->input('Description');
-        $category->Thumbnail = $request->input('Thumbnail');
-        $category->ImageUrl = $request->input('ImageUrl');
-        $category->Active = $request->input('Active');
-        $category->Organization_id = $request->input('Organization_id');
-        $saved =  $category->save();
-
-
-
-        if ($saved){
-
-
-            $response = new Requestresponse();
-            $response->code = "200";
-            $response->status = "Success";
-            $response->message = "category  was saved";
-            $response->data = $category;
-
-
-            $responseJSON = json_encode($response);
-
-
-            return $responseJSON;
-
-
-        }else{
-
-
+        if ($validator->fails())
+        {
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = "category   failed to save";
+            $response->message = $validator->messages();
             $response->data = "null";
 
 
             $responseJSON = json_encode($response);
 
-
             return $responseJSON;
+        }else{
 
-        }**/
+            $imageUrl = Utility::uploadImage($request,'ImageUrl');
+
+            $category = new Category;
 
 
 
-        return $value;
+            $category->Name = $request->input('Name');
+            $category->Description = $request->input('Description');
+            $category->Thumbnail = $request->input('Thumbnail');
+            $category->ImageUrl = $imageUrl;
+            $category->Active = $request->input('Active');
+            $category->Organization_id = $request->input('Organization_id');
+            $saved =  $category->save();
+
+
+
+            if ($saved){
+
+
+                $response = new Requestresponse();
+                $response->code = "200";
+                $response->status = "Success";
+                $response->message = "category  was saved";
+                $response->data = $category;
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+
+            }else{
+
+
+                $response = new Requestresponse();
+                $response->code = "500";
+                $response->status = "Failed";
+                $response->message = "category   failed to save";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+            }
+
+
+        }
+
+
+
+
+
+
+
 
 
     }

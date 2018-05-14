@@ -179,7 +179,7 @@ class ProductCategoryController extends Controller
 
                     $category = new Category;
 
-                    $category->Name =$Name;
+                    $category->Name = $request->input('Name');
                     $category->Description = $request->input('Description');
                     $category->Thumbnail = $imageUrl;
                     $category->ImageUrl = $imageUrl;

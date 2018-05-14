@@ -21,9 +21,9 @@ class Utility
         Cloudder::upload($image_name, null);
         $value = Cloudder::getResult();
 
+        $jsonValue = json_decode(json_encode($value),true);
 
-        $jsonValue = json_decode($value);
-       // $status = $location->status;
+
 
         return $jsonValue->secure_url;
 

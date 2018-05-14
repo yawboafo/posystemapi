@@ -34,7 +34,7 @@ class Utility
         $photo = $request->file($image_input_name);
         $thumb_img = Image::make($photo)->fit(100, 100, function ($constraint) {
             $constraint->aspectRatio();
-        });
+        })->encode('jpg');
 
         Cloudder::upload($thumb_img, null);
         $value = Cloudder::getResult();

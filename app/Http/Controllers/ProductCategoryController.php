@@ -19,7 +19,7 @@ class ProductCategoryController extends Controller
 
 
 
-        $var =   Utility::uploadImage($request,ImageUrl);
+        $var =   Utility::uploadImage($request,'ImageUrl');
 
        /** $category = new Category;
 

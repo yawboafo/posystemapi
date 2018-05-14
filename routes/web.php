@@ -20,5 +20,26 @@ Route::get('/upload', function () {
 });
 
 
+
+//PRODUCT CATEGORY
+
 Route::post('category/create',['uses' => 'ProductCategoryController@createCategory']);
+Route::post('category/update',['uses' => 'ProductCategoryController@updateCategory']);
+Route::post('category/delete', ['uses' => 'ProductCategoryController@deleteCategory']);
 Route::get('getallCategories',['uses' => 'ProductCategoryController@getAllCategories']);
+
+
+//ORGANIZATIONS
+
+Route::post('organization/create',['uses' => 'OrganizationsController@createOrganization']);
+Route::post('organization/update',['uses' => 'OrganizationsController@updateOrganization']);
+Route::post('organization/delete', ['uses' => 'OrganizationsController@deleteOrganization']);
+Route::get('organizations', ['uses' => 'OrganizationsController@getAllOrganization']);
+
+
+//ORGANIZATION CATEGORY
+
+Route::post('organizationCategory/create',['uses' => 'OrganizationsCategoriesController@createOrganizationcategory']);
+Route::post('organizationCategory/update',['uses' => 'OrganizationsCategoriesController@updateOrganizationcategory']);
+Route::post('organizationCategory/delete', ['uses' => 'OrganizationsCategoriesController@deleteOrganizationcategory']);
+Route::get('organizationCategories', ['uses' => 'OrganizationsCategoriesController@getAllOrganizationcategory']);

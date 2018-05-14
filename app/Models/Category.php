@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 13 May 2018 12:57:28 +0000.
+ * Date: Sun, 13 May 2018 21:43:03 +0000.
  */
 
 namespace App\Models;
@@ -18,7 +18,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $Thumbnail
  * @property string $ImageUrl
  * @property string $Active
+ * @property int $Organization_id
  * 
+ * @property \App\Models\Organization $organization
  * @property \Illuminate\Database\Eloquent\Collection $products
  *
  * @package App\Models
@@ -26,8 +28,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Category extends Eloquent
 {
 	protected $table = 'category';
-	protected $primaryKey = 'idCategory';
 	public $timestamps = false;
+
+	protected $casts = [
+		'Organization_id' => 'int'
+	];
 
 	protected $fillable = [
 		'Name',
@@ -37,8 +42,13 @@ class Category extends Eloquent
 		'Active'
 	];
 
+	public function organization()
+	{
+		return $this->belongsTo(\App\Models\Organization::class, 'Organization_id');
+	}
+
 	public function products()
 	{
-		return $this->hasMany(\App\Models\Product::class, 'Category_id');
+		return $this->hasMany(\App\Models\Product::class, 'CategoryID');
 	}
 }

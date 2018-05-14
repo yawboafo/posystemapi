@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\LocalModels\Requestresponse;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Organization;
 
-class ProductCategoryController extends Controller
+class OrganizationsController extends Controller
 {
-
-
-    public function createCategory(Request $request){
-
-
-
-        $category = new Category;
+    public function createOrganization(Request $request){
 
 
 
-        $category->Name = $request->input('Name');
-        $category->Address = $request->input('Address');
-        $category->Email = $request->input('Email');
-        $category->Phone = $request->input('Phone');
-        $category->Type = $request->input('Type');
-        $category->OrganizationCategory_id = $request->input('OrganizationCategory_id');
-        $saved =  $category->save();
+        $organization = new Organization;
+
+
+
+        $organization->Name = $request->input('Name');
+        $organization->Address = $request->input('Address');
+        $organization->Email = $request->input('Email');
+        $organization->Phone = $request->input('Phone');
+        $organization->Type = $request->input('Type');
+        $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+        $saved =  $organization->save();
 
 
 
@@ -66,7 +65,7 @@ class ProductCategoryController extends Controller
     }
 
 
-    public function updateCategory(Request $request){
+    public function updateOrganization(Request $request){
 
         $Name = $request->input('Name');
 
@@ -173,7 +172,7 @@ class ProductCategoryController extends Controller
     }
 
 
-    public function deleteCategory(Request $request){
+    public function deleteOrganization(Request $request){
 
         $Name = $request->input('Name');
         $organization = Organization::where('Name',$Name)->first();
@@ -234,7 +233,7 @@ class ProductCategoryController extends Controller
 
     }
 
-    public function getAllCategory(){
+    public function getAllOrganization(){
 
 
 
@@ -276,9 +275,4 @@ class ProductCategoryController extends Controller
 
 
     }
-
-
-
 }
-
-

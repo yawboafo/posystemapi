@@ -18,26 +18,7 @@ class ProductCategoryController extends Controller
 
 
 
-
-           // $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
-            //);
-
-
-           /** if ($validator->fails())
-            {
-                $response = new Requestresponse();
-                $response->code = "500";
-                $response->status = "Failed";
-                $response->message = $validator->messages();
-                $response->data = "null";
-
-
-                $responseJSON = json_encode($response);
-
-                return $responseJSON;
-            }else{**/
-
-                $variable =  $request->file('ImageUrl');
+                $variable =  $request->file('Image');
 
                 if ( empty ( $variable ) ){
 
@@ -45,7 +26,7 @@ class ProductCategoryController extends Controller
 
                 }else{
 
-                    $imageUrl = Utility::uploadImage($request,'ImageUrl');
+                    $imageUrl = Utility::uploadImage($request,'Image');
                 }
 
 
@@ -168,7 +149,7 @@ class ProductCategoryController extends Controller
             }else{
 
 
-                $category->Name = $request->input('Name');
+             /**   $category->Name = $request->input('Name');
                 $category->Description = $request->input('Description');
                 $category->Thumbnail = $request->input('Thumbnail');
                 $category->ImageUrl = $request->input('ImageUrl');
@@ -176,7 +157,34 @@ class ProductCategoryController extends Controller
                 $category->Organization_id = $request->input('Organization_id');
 
 
+                $saved =  $category->save();  **/
+
+
+
+                $variable =  $request->file('Image');
+
+                if ( empty ( $variable ) ){
+
+                    $imageUrl = "";
+
+                }else{
+
+                    $imageUrl = Utility::uploadImage($request,'Image');
+                }
+
+
+
+                $category = new Category;
+
+                $category->Name =$Name;
+                $category->Description = $request->input('Description');
+                $category->Thumbnail = $imageUrl;
+                $category->ImageUrl = $imageUrl;
+                $category->Active = $request->input('Active');
+                $category->Organization_id = $request->input('Organization_id');
                 $saved =  $category->save();
+
+
                 if ($saved){
 
 
@@ -296,7 +304,7 @@ class ProductCategoryController extends Controller
 
     }
 
-    public function getAllCategory(){
+    public function getAllCategories(){
 
 
 

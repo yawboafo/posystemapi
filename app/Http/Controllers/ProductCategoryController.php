@@ -14,7 +14,8 @@ class ProductCategoryController extends Controller
 
 
 
-        $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']);
+        $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
+        );
 
 
         if ($validator->fails())
@@ -33,13 +34,15 @@ class ProductCategoryController extends Controller
 
             $imageUrl = Utility::uploadImage($request,'ImageUrl');
 
+            $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
+
             $category = new Category;
 
 
 
             $category->Name = $request->input('Name');
             $category->Description = $request->input('Description');
-            $category->Thumbnail = $request->input('Thumbnail');
+            $category->Thumbnail = $thumbNail;
             $category->ImageUrl = $imageUrl;
             $category->Active = $request->input('Active');
             $category->Organization_id = $request->input('Organization_id');

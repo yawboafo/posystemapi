@@ -27,5 +27,21 @@ class Utility
 
     }
 
+    public static function generateThumbnail(Request $request,$image_input_name){
+
+
+
+        $photo = $request->file($image_input_name);
+        $thumb_img = Image::make($photo->getRealPath())->resize(100, 100);
+
+        Cloudder::upload($thumb_img, null);
+        $value = Cloudder::getResult();
+        $jsonValue = json_encode($value);
+        $jsonValue =  json_decode($jsonValue);
+
+        return $jsonValue->secure_url;
+
+    }
+
 
 }

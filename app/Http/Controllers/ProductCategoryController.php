@@ -12,7 +12,9 @@ class ProductCategoryController extends Controller
 
     public function createCategory(Request $request){
 
+        return $request->input('Name');
 
+/**
 
         $validator = Validator::make($request->all(),['ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000']
         );
@@ -85,7 +87,7 @@ class ProductCategoryController extends Controller
 
         }
 
-
+***/
 
 
 

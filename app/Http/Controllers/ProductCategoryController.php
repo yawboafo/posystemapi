@@ -33,7 +33,6 @@ class ProductCategoryController extends Controller
         }else{
 
             $imageUrl = Utility::uploadImage($request,'ImageUrl');
-
             $thumbNail = Utility::generateThumbnail($request,'ImageUrl');
 
             $category = new Category;

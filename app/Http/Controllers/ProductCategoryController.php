@@ -17,9 +17,11 @@ class ProductCategoryController extends Controller
             'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
+        $image_name = $request->file('ImageUrl')->getRealPath();;
 
+        Cloudder::upload($image_name, null);
 
-        $var =   Utility::uploadImage($request,'ImageUrl');
+       //Utility::uploadImage($request,'ImageUrl');
 
        /** $category = new Category;
 
@@ -70,7 +72,7 @@ class ProductCategoryController extends Controller
 
 
 
-        return $var;
+        return "saved image";
 
 
     }

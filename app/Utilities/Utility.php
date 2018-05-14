@@ -22,7 +22,7 @@ class Utility
         $value = Cloudder::getResult();
 
 
-        $jsonValue = json_decode(file_get_contents($value));
+        $jsonValue = json_decode($value);
        // $status = $location->status;
 
         return $jsonValue->secure_url;

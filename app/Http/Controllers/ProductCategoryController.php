@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
 
 
         $this->validate($request,[
-            'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'ImageUrl'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
         $image_name = $request->file('ImageUrl')->getRealPath();;

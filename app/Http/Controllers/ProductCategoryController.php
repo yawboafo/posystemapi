@@ -185,7 +185,7 @@ class ProductCategoryController extends Controller
                     $category->ImageUrl = $imageUrl;
                     $category->Active = $request->input('Active');
                     $category->Organization_id = $request->input('Organization_id');
-                    $saved =  $category->update($category);
+                    $saved =  $category->update($category->toArray());
 
 
                     if ($saved){

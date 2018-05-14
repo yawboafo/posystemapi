@@ -9,7 +9,7 @@
 namespace app\Utilities;
 use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
-
+use Image;
 class Utility
 {
 

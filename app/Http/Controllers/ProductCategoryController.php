@@ -20,7 +20,7 @@ class ProductCategoryController extends Controller
         $image_name = $request->file('ImageUrl')->getRealPath();;
 
         Cloudder::upload($image_name, null);
-
+        $value = Cloudder::getResult();
        //Utility::uploadImage($request,'ImageUrl');
 
        /** $category = new Category;
@@ -72,7 +72,7 @@ class ProductCategoryController extends Controller
 
 
 
-        return "saved image";
+        return $value;
 
 
     }

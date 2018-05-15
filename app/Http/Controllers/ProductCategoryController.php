@@ -185,7 +185,10 @@ class ProductCategoryController extends Controller
                     $category->ImageUrl = $imageUrl;
                     $category->Active = $request->input('Active');
                     $category->Organization_id = $request->input('Organization_id');
-                    $saved =  $category->update($category->toArray());
+
+
+                    $saved =   Category::where('idCategory', '=', $idCategory)->update($category->toArray());
+                 //   $saved =  $category->update($category->toArray());
 
 
                     if ($saved){

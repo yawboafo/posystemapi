@@ -64,12 +64,12 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function updateOrganizationcategory(Request $request){
+    public function updateOrganizationcategory($id,Request $request){
 
-        $OrganizationCategoryName = $request->input('OrganizationCategoryName');
+        $OrganizationCategory_id = $request->input('OrganizationCategory_id');
 
 
-        if ( is_null($OrganizationCategoryName)){
+        if ( is_null($OrganizationCategory_id)){
 
             $response = new Requestresponse();
             $response->code = "100";
@@ -86,7 +86,7 @@ class OrganizationsCategoriesController extends Controller
 
         }else{
 
-            $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();
+            $organizationCategory = Organizationcategory::find($OrganizationCategory_id);
 
             if ( is_null($organizationCategory)){
 
@@ -168,11 +168,11 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function deleteOrganizationcategory(Request $request){
+    public function deleteOrganizationcategory( $id){
 
-        $OrganizationCategoryName = $request->input('OrganizationCategoryName');
+      //  $$OrganizationCategory_id = $request->input('OrganizationCategory_id');
 
-        $organizationCategory = Organizationcategory::where('OrganizationCategoryName',$OrganizationCategoryName)->first();
+        $organizationCategory = Organizationcategory::find($id);
 
         if ( is_null($organizationCategory)){
 

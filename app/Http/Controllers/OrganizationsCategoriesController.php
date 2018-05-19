@@ -64,7 +64,7 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function updateOrganizationcategory($id,Request $request){
+    public function updateOrganizationcategory(Request $request){
 
         $OrganizationCategory_id = $request->input('OrganizationCategory_id');
 

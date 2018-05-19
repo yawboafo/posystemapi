@@ -74,7 +74,7 @@ class OrganizationsCategoriesController extends Controller
             $response = new Requestresponse();
             $response->code = "100";
             $response->status = "Validate errors";
-            $response->message = "Organization Category Name cannot be empty";
+            $response->message = "Organization Category ID cannot be empty";
             $response->data = "null";
 
 
@@ -168,9 +168,9 @@ class OrganizationsCategoriesController extends Controller
     }
 
 
-    public function deleteOrganizationcategory( $id){
+    public function deleteOrganizationcategory( Request $request){
 
-      //  $$OrganizationCategory_id = $request->input('OrganizationCategory_id');
+        $id = $request->input('OrganizationCategory_id');
 
         $organizationCategory = Organizationcategory::find($id);
 

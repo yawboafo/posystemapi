@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\LocalModels\Requestresponse;
 use Illuminate\Http\Request;
 use App\Models\Organization;
+use PhpParser\Node\Stmt\TryCatch;
 
 class OrganizationsController extends Controller
 {
@@ -62,7 +63,7 @@ try{
     $response = new Requestresponse();
     $response->code = "100";
     $response->status = "Failed";
-    $response->message = "Organization  failed";
+    $response->message = $exception;
     $response->data = "null";
 
 
@@ -82,34 +83,17 @@ try{
 
     public function updateOrganization(Request $request){
 
-        $Name = $request->input('Name');
+        try{
 
+            $Organization_id = $request->input('Organization_id');
+            $Name = $request->input('Name');
 
-        if ( is_null($Name)){
-
-            $response = new Requestresponse();
-            $response->code = "100";
-            $response->status = "Validate errors";
-            $response->message = "Organization  Name cannot be empty";
-            $response->data = "null";
-
-
-            $responseJSON = json_encode($response);
-
-
-            return $responseJSON;
-
-
-        }else{
-
-            $organization = Organization::where('Name',$Name)->first();
-
-            if ( is_null($organization)){
+            if ( is_null($Organization_id)){
 
                 $response = new Requestresponse();
                 $response->code = "100";
-                $response->status = "Failed";
-                $response->message = "Organization  does not exist";
+                $response->status = "Validate errors";
+                $response->message = "Organization  ID cannot be empty";
                 $response->data = "null";
 
 
@@ -118,40 +102,17 @@ try{
 
                 return $responseJSON;
 
+
             }else{
 
+                $organization = Organization::where('Organization_id',$Organization_id)->first();
 
-                $organization->Name = $request->input('Name');
-                $organization->Address = $request->input('Address');
-                $organization->Email = $request->input('Email');
-                $organization->Phone = $request->input('Phone');
-                $organization->Type = $request->input('Type');
-                $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
-                $saved =  $organization->save();
-
-                if ($saved){
-
+                if ( is_null($organization)){
 
                     $response = new Requestresponse();
-                    $response->code = "200";
-                    $response->status = "Success";
-                    $response->message = "Organization  was saved";
-                    $response->data = $organization->toJson();
-
-
-                    $responseJSON = json_encode($response);
-
-
-                    return $responseJSON;
-
-
-                }else{
-
-
-                    $response = new Requestresponse();
-                    $response->code = "500";
+                    $response->code = "100";
                     $response->status = "Failed";
-                    $response->message = "Organization   failed to save";
+                    $response->message = "Organization  does not exist";
                     $response->data = "null";
 
 
@@ -160,7 +121,58 @@ try{
 
                     return $responseJSON;
 
+                }else{
+
+
+                    $organization->Name = $request->input('Name');
+                    $organization->Address = $request->input('Address');
+                    $organization->Email = $request->input('Email');
+                    $organization->Phone = $request->input('Phone');
+                    $organization->Type = $request->input('Type');
+                    $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+                    $saved =  $organization->save();
+
+                    if ($saved){
+
+
+                        $response = new Requestresponse();
+                        $response->code = "200";
+                        $response->status = "Success";
+                        $response->message = "Organization  was saved";
+                        $response->data = $organization->toJson();
+
+
+                        $responseJSON = json_encode($response);
+
+
+                        return $responseJSON;
+
+
+                    }else{
+
+
+                        $response = new Requestresponse();
+                        $response->code = "500";
+                        $response->status = "Failed";
+                        $response->message = "Organization   failed to save";
+                        $response->data = "null";
+
+
+                        $responseJSON = json_encode($response);
+
+
+                        return $responseJSON;
+
+                    }
+
                 }
+
+
+
+
+
+
+
 
             }
 
@@ -169,13 +181,20 @@ try{
 
 
 
+        }catch (\Exception $exception){
+            $response = new Requestresponse();
+            $response->code = "100";
+            $response->status = "Failed";
+            $response->message = $exception;
+            $response->data = "null";
 
+
+            $responseJSON = json_encode($response);
+
+
+            return $responseJSON;
 
         }
-
-
-
-
 
 
 

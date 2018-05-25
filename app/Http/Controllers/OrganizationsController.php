@@ -105,7 +105,7 @@ try{
 
             }else{
 
-                $organization = Organization::where('Organization_id',$Organization_id)->first();
+                $organization = Organization::where('id',$Organization_id)->first();
 
                 if ( is_null($organization)){
 

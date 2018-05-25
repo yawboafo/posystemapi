@@ -197,7 +197,7 @@ class ProductCategoryController extends Controller
                         $response = new Requestresponse();
                         $response->code = "200";
                         $response->status = "Success";
-                        $response->message = "Category  was saved";
+                        $response->message = "Category  was updated";
                         $response->data = $category->toJson();
 
 

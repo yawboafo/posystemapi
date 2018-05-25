@@ -10,54 +10,69 @@ class OrganizationsController extends Controller
 {
     public function createOrganization(Request $request){
 
-
-
-        $organization = new Organization;
-
-
-
-        $organization->Name = $request->input('Name');
-        $organization->Address = $request->input('Address');
-        $organization->Email = $request->input('Email');
-        $organization->Phone = $request->input('Phone');
-        $organization->Type = $request->input('Type');
-        $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
-        $saved =  $organization->save();
+try{
+    $organization = new Organization;
 
 
 
-        if ($saved){
+    $organization->Name = $request->input('Name');
+    $organization->Address = $request->input('Address');
+    $organization->Email = $request->input('Email');
+    $organization->Phone = $request->input('Phone');
+    $organization->Type = $request->input('Type');
+    $organization->OrganizationCategory_id = $request->input('OrganizationCategory_id');
+    $saved =  $organization->save();
 
 
-            $response = new Requestresponse();
-            $response->code = "200";
-            $response->status = "Success";
-            $response->message = "Organization  was saved";
-            $response->data = $organization;
+
+    if ($saved){
 
 
-            $responseJSON = json_encode($response);
+        $response = new Requestresponse();
+        $response->code = "200";
+        $response->status = "Success";
+        $response->message = "Organization  was saved";
+        $response->data = $organization;
 
 
-            return $responseJSON;
+        $responseJSON = json_encode($response);
 
 
-        }else{
+        return $responseJSON;
 
 
-            $response = new Requestresponse();
-            $response->code = "500";
-            $response->status = "Failed";
-            $response->message = "Organization   failed to save";
-            $response->data = "null";
+    }else{
 
 
-            $responseJSON = json_encode($response);
+        $response = new Requestresponse();
+        $response->code = "500";
+        $response->status = "Failed";
+        $response->message = "Organization   failed to save";
+        $response->data = "null";
 
 
-            return $responseJSON;
+        $responseJSON = json_encode($response);
 
+
+        return $responseJSON;
+
+    }
+}catch (\Exception $exception){
+
+    $response = new Requestresponse();
+    $response->code = "100";
+    $response->status = "Failed";
+    $response->message = "Organization  failed";
+    $response->data = "null";
+
+
+    $responseJSON = json_encode($response);
+
+
+    return $responseJSON;
         }
+
+
 
 
 

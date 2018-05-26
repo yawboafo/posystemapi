@@ -93,7 +93,7 @@ class UsersController extends Controller
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = $exception;
+            $response->message = $exception + "";
             $response->data = "null";
 
 

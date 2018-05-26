@@ -84,7 +84,7 @@ class ProductController extends Controller
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = "Product   failed to save";
+            $response->message = $exception;
             $response->data = "null";
 
 

@@ -231,7 +231,7 @@ class ProductController extends Controller
 
             $responseJSON = json_encode($response);
 
-            return $exception;
+            return  $responseJSON;
 
 
         }

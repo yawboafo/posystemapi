@@ -20,6 +20,13 @@ Route::get('/upload', function () {
 });
 
 
+//User
+
+Route::post('user/create',['uses' => 'UsersController@createUser']);
+Route::post('user/update',['uses' => 'UsersController@updateUser']);
+Route::post('user/delete', ['uses' => 'UsersController@deleteUser']);
+Route::get('getAllUsers',['uses' => 'UsersController@getAllUsers']);
+Route::post('getAllOrganizationUsers',['uses' => 'UsersController@getAllOrganizationBasedUsers']);
 
 //PRODUCT
 

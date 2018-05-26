@@ -122,7 +122,7 @@ class ProductController extends Controller
 
             }else{
 
-                $product = Product::find($idProduct);
+                $product = Product::where('ProductID',$idProduct)->first();;
 
                 if ( is_null($product)){
 
@@ -139,17 +139,6 @@ class ProductController extends Controller
                     return $responseJSON;
 
                 }else{
-
-
-                    /**   $category->Name = $request->input('Name');
-                    $category->Description = $request->input('Description');
-                    $category->Thumbnail = $request->input('Thumbnail');
-                    $category->ImageUrl = $request->input('ImageUrl');
-                    $category->Active = $request->input('Active');
-                    $category->Organization_id = $request->input('Organization_id');
-
-
-                    $saved =  $category->save();  **/
 
 
 

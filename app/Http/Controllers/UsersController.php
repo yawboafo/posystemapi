@@ -32,7 +32,7 @@ class UsersController extends Controller
 
 
 
-            $user = new User;
+            $user = new User();
 
             $user->Name = $request->input('Name');
             $user->Dob = $request->input('Dob');

@@ -122,7 +122,7 @@ class ProductController extends Controller
 
             }else{
 
-                $product = Category::find($idProduct);
+                $product = Product::find($idProduct);
 
                 if ( is_null($product)){
 

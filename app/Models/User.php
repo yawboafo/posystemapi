@@ -52,7 +52,8 @@ class User extends Eloquent
 		'RoleType',
 		'ProfileUrl',
 		'LastSignIn',
-		'Token'
+		'Token',
+        'organization_id'
 	];
 
 	public function organization()

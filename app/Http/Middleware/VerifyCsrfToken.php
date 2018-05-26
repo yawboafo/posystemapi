@@ -23,6 +23,11 @@ class VerifyCsrfToken extends Middleware
 
         'category/create',
         'category/update',
-        'category/delete'
+        'category/delete',
+
+
+        'product/create',
+        'product/update',
+        'product/delete'
     ];
 }

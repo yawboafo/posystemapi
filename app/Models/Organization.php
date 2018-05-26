@@ -41,7 +41,8 @@ class Organization extends Eloquent
 		'Address',
 		'Phone',
 		'Email',
-		'Type'
+		'Type',
+        'OrganizationCategory_id'
 	];
 
 	public function organizationcategory()

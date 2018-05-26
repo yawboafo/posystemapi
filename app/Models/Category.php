@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 13 May 2018 21:43:03 +0000.
+ * Date: Sat, 26 May 2018 17:09:49 +0000.
  */
 
 namespace App\Models;
@@ -12,7 +12,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class Category
  * 
- * @property int $idCategory
+ * @property int $id
  * @property string $Name
  * @property string $Description
  * @property string $Thumbnail
@@ -39,8 +39,7 @@ class Category extends Eloquent
 		'Description',
 		'Thumbnail',
 		'ImageUrl',
-		'Active',
-		'Organization_id'
+		'Active'
 	];
 
 	public function organization()

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 13 May 2018 21:43:03 +0000.
+ * Date: Sat, 26 May 2018 17:09:49 +0000.
  */
 
 namespace App\Models;
@@ -16,7 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $SKU
  * @property string $IDSKU
  * @property string $Name
- * @property string $Desciprtion
+ * @property string $Description
  * @property int $Quantity
  * @property float $UnitPrice
  * @property string $Discount
@@ -24,7 +24,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $Ranking
  * @property string $Datecreated
  * @property string $DateUpdated
- * @property string $Thumbnail
  * @property string $ImageUrl
  * @property int $CategoryID
  * @property int $Organization_id
@@ -50,7 +49,7 @@ class Product extends Eloquent
 		'SKU',
 		'IDSKU',
 		'Name',
-		'Desciprtion',
+		'Description',
 		'Quantity',
 		'UnitPrice',
 		'Discount',
@@ -58,7 +57,6 @@ class Product extends Eloquent
 		'Ranking',
 		'Datecreated',
 		'DateUpdated',
-		'Thumbnail',
 		'ImageUrl'
 	];
 

@@ -57,7 +57,9 @@ class Product extends Eloquent
 		'Ranking',
 		'Datecreated',
 		'DateUpdated',
-		'ImageUrl'
+		'ImageUrl',
+        'Organization_id',
+        'CategoryID'
 	];
 
 	public function category()

@@ -85,7 +85,7 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = $exception;
+            $response->message = $exception->getMessage();
             $response->data = "null";
 
 
@@ -106,7 +106,6 @@ class ProductCategoryController extends Controller
 
 
     }
-
 
     public function updateCategory(Request $request){
 
@@ -243,13 +242,13 @@ class ProductCategoryController extends Controller
             $response = new Requestresponse();
             $response->code = "500";
             $response->status = "Failed";
-            $response->message = $exception + "";
+            $response->message = $exception->getMessage();
             $response->data = "null";
 
 
             $responseJSON = json_encode($response);
 
-            return $exception;
+            return $responseJSON;
 
 
         }
@@ -266,7 +265,6 @@ class ProductCategoryController extends Controller
 
 
     }
-
 
     public function deleteCategory(Request $request){
 
@@ -372,6 +370,97 @@ class ProductCategoryController extends Controller
 
     }
 
+    public function getCategory(Request $request){
+        $idCategory = $request->input('idCategory');
+
+
+        try{
+
+
+            if ( is_null($idCategory)){
+
+                $response = new Requestresponse();
+                $response->code = "100";
+                $response->status = "Validate errors";
+                $response->message = "category  ID cannot be empty";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+
+            }else{
+
+                $category = Category::where('idCategory',$idCategory)->first();
+
+                if ( is_null($category)){
+
+                    $response = new Requestresponse();
+                    $response->code = "100";
+                    $response->status = "Failed";
+                    $response->message = "Category  does not exist";
+                    $response->data = "null";
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+                }else{
+
+
+                    $response = new Requestresponse();
+                    $response->code = "100";
+                    $response->status = "Failed";
+                    $response->message = "Category  does  exist";
+                    $response->data = $category->toJson();
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+        }catch (\Exception $exception){
+
+            $response = new Requestresponse();
+            $response->code = "500";
+            $response->status = "Failed";
+            $response->message = $exception->getMessage();
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+            return $responseJSON;
+
+
+        }
+
+    }
 
 
 }

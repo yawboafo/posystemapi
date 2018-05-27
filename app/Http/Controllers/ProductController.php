@@ -298,6 +298,95 @@ class ProductController extends Controller
 
     }
 
+    public function getProduct(Request $request){
 
+        $idProduct = $request->input('id');
+
+
+        try{
+
+
+            if ( is_null($idProduct)){
+
+                $response = new Requestresponse();
+                $response->code = "100";
+                $response->status = "Validate errors";
+                $response->message = "Product  ID cannot be empty";
+                $response->data = "null";
+
+
+                $responseJSON = json_encode($response);
+
+
+                return $responseJSON;
+
+
+            }else{
+
+                $product = Product::where('ProductID',$idProduct)->first();;
+
+                if ( is_null($product)){
+
+                    $response = new Requestresponse();
+                    $response->code = "100";
+                    $response->status = "Failed";
+                    $response->message = "Product  does not exist";
+                    $response->data = "null";
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+                }else{
+
+
+
+                    $response = new Requestresponse();
+                    $response->code = "200";
+                    $response->status = "Success";
+                    $response->message = "Product  was updated";
+                    $response->data = $product->toJson();
+
+
+                    $responseJSON = json_encode($response);
+
+
+                    return $responseJSON;
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+        }catch (\Exception $exception){
+
+            $response = new Requestresponse();
+            $response->code = "500";
+            $response->status = "Failed";
+            $response->message = $exception->getMessage() ;
+            $response->data = "null";
+
+
+            $responseJSON = json_encode($response);
+
+            return  $responseJSON;
+
+
+        }
+    }
 
 }

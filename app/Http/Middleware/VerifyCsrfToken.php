@@ -24,11 +24,13 @@ class VerifyCsrfToken extends Middleware
         'category/create',
         'category/update',
         'category/delete',
+        'category/get',
 
 
         'product/create',
         'product/update',
         'product/delete',
+        'product/get',
 
         'user/create',
         'user/update',

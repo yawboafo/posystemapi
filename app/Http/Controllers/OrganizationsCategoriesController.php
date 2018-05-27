@@ -108,6 +108,8 @@ class OrganizationsCategoriesController extends Controller
                 $organizationCategory->OrganizationCategoryName = $request->input('OrganizationCategoryName');
                 $organizationCategory->OrganizationCategoryDescription = $request->input('OrganizationCategoryDescription');
                 $organizationCategory->OrganizationCategoryType = $request->input('OrganizationCategoryType');
+
+
                 $saved =  $organizationCategory->save();
 
                 if ($saved){

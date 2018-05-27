@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use Carbon\Carbon;
 use App\LocalModels\Requestresponse;
 
 
@@ -16,7 +16,7 @@ class ProductController extends Controller
 
     public function createProduct(Request $request){
 
-
+        $current = Carbon::now();
         try{
 
 
@@ -39,7 +39,7 @@ class ProductController extends Controller
             $product->Discount =  $request->input('Discount');
             $product->ImageUrl = $imageUrl;
             $product->isAvailable = $request->input('isAvailable');
-            $product->Datecreated = $request->input('Datecreated');
+            $product->Datecreated = $current;   //   $request->input('Datecreated');
             $product->isAvailable= $request->input('isAvailable');
             $product->Organization_id = $request->input('organization_id');
             $product->CategoryID =  $request->input('category_id');
@@ -100,7 +100,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request){
 
         $idProduct = $request->input('id');
-
+        $current = Carbon::now();
 
         try{
 
@@ -164,7 +164,7 @@ class ProductController extends Controller
                     $product->Discount =  $request->input('Discount');
                     $product->ImageUrl = $imageUrl;
                     $product->isAvailable = $request->input('isAvailable');
-                    $product->Datecreated = $request->input('Datecreated');
+                    $product->Datecreated = $current ; //$request->input('Datecreated');
                     $product->isAvailable= $request->input('isAvailable');
                     $product->Organization_id = $request->input('organization_id');
                     $product->CategoryID =  $request->input('category_id');
